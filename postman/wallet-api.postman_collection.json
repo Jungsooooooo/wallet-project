@@ -1,0 +1,105 @@
+{
+  "info": {
+    "name": "wallet-api",
+    "description": "지갑 API — walletId는 요청 body에 포함. 기본 URL: http://localhost:8080",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "walletId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. 지갑 생성",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"initialBalance\": 100000\n}"
+        },
+        "url": "{{baseUrl}}/api/wallets",
+        "description": "응답 id(문자열)를 walletId 변수에 넣으세요."
+      }
+    },
+    {
+      "name": "2. 지갑 조회",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"walletId\": \"{{walletId}}\"\n}"
+        },
+        "url": "{{baseUrl}}/api/wallets/lookup"
+      }
+    },
+    {
+      "name": "3. 입금",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"walletId\": \"{{walletId}}\",\n  \"amount\": 5000,\n  \"description\": \"테스트 입금\"\n}"
+        },
+        "url": "{{baseUrl}}/api/wallets/deposit"
+      }
+    },
+    {
+      "name": "4. 출금",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"walletId\": \"{{walletId}}\",\n  \"amount\": 10000,\n  \"transactionId\": \"TXN_UUID_12345\"\n}"
+        },
+        "url": "{{baseUrl}}/api/wallets/withdrawals"
+      }
+    },
+    {
+      "name": "5. 거래 내역 조회",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"walletId\": \"{{walletId}}\"\n}"
+        },
+        "url": "{{baseUrl}}/api/wallets/transactions"
+      }
+    }
+  ]
+}
