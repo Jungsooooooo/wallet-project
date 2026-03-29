@@ -18,6 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
+/**
+ * 거래 목록 API 응답이 스펙대로 snake_case JSON 필드를 포함하는지 HTTP 통합 테스트로 검증한다.
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("local")
 class WalletTransactionsIntegrationTest {
@@ -31,6 +34,7 @@ class WalletTransactionsIntegrationTest {
     @Autowired
     private WalletService walletService;
 
+    /** 출금 한 건을 만든 뒤 {@code /api/wallets/transactions} 본문에 기대 필드명이 있는지 확인한다. */
     @Test
     void listTransactions_returnsSnakeCaseFields() {
         var wallet = walletService.createWallet(20_000L);
